@@ -1,0 +1,20 @@
+---
+- name: Configure Windows Server
+  hosts: windows
+  tasks:
+    - name: Set the timezone
+      ansible.windows.win_command:
+        cmd: "tzutil /s UTC"
+
+    - name: Set the system date
+      ansible.windows.win_command:
+        cmd: "powershell -Command \"Set-Date -Date '12/03/2024 10:30:00'\""
+
+    - name: Verify the current date and time
+      ansible.windows.win_command:
+        cmd: "powershell -Command Get-Date"
+      register: verify_time
+
+    - name: Print verification output
+      ansible.builtin.debug:
+        msg: "{{ verify_time.stdout }}"

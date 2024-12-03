@@ -1,0 +1,21 @@
+[ec2]
+ec2-13-48-44-55.eu-north-1.compute.amazonaws.com  ansible_python_interpreter=/usr/bin/python3.12
+ec2-16-171-25-137.eu-north-1.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3.12
+
+
+[ec2:vars]
+ansible_ssh_private_key_file=/home/wagdy/Downloads/prometh.pem
+ansible_user=ubuntu
+
+[windows]
+ec2-16-171-253-93.eu-north-1.compute.amazonaws.com
+
+
+[windows:vars]
+ansible_user=Administrator
+ansible_password=a1Nb-MVyML=UHCSMe&w1LHe8Lb6eS%%1
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_port=5986
+ansible_winrm_transport=basic
+

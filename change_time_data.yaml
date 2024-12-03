@@ -1,0 +1,28 @@
+---
+- name: Configure EC2 instances
+  hosts: ec2
+  become: yes  
+  become_method: sudo  
+  tasks:
+    - name: Disable automatic time synchronization
+      ansible.builtin.shell: timedatectl set-ntp false
+      register: disable_ntp
+
+    - name: Change the system time and date
+      ansible.builtin.shell: |
+        timedatectl set-timezone UTC
+        timedatectl set-time "2024-12-03 10:30:00"
+      register: date_output  #use it for debugggging , it take the stdr of the console 
+
+      # ha check 3al el date I have changed
+    - name: Verify the new time and date
+      ansible.builtin.command: date
+      register: verify_output
+      # print the register I have stored above
+    - name: Print verification output
+      ansible.builtin.debug:
+        msg: "{{ verify_output.stdout }}"
+
+
+
+
